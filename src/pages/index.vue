@@ -24,6 +24,7 @@
       </div>
     </div>
     <div class="index-right">
+      <slide-show :slideShow=""></slide-show>
       <div class="index-board-list">
         <div class="index-board-item" v-for="(item, index) in boardList"
              :class="[{'line-last':index%2!==0},'index-board-'+item.id]">
@@ -41,11 +42,15 @@
 </template>
 
 <script>
+  import slideShow from '../components/slideShow'
   export default {
-    created: function(){
+    components: {
+      slideShow
+    },
+    created: function () {
       this.$http.get('api/getNewsList').then((res) => {
         this.newsList = res.data
-      },function (err) {
+      }, function (err) {
         console.log(err)
       })
     },
