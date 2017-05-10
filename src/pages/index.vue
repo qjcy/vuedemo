@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="index-right">
-      <slide-show :slideShow=""></slide-show>
+      <slide-show></slide-show>
       <div class="index-board-list">
         <div class="index-board-item" v-for="(item, index) in boardList"
              :class="[{'line-last':index%2!==0},'index-board-'+item.id]">
@@ -32,7 +32,7 @@
             <h2>{{item.title}}</h2>
             <p>{{item.description}}</p>
             <div class="index-board-button">
-              <a href="" class="button">立即购买</a>
+              <a class="button">立即购买</a>
             </div>
           </div>
         </div>
