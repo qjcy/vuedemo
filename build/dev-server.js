@@ -68,7 +68,7 @@ var apiRouter = jsonServer.router('db.json')
 var middlewares = jsonServer.defaults()
 
 apiServer.use(middlewares)
-apiServer.use(apiRouter)
+apiServer.use('/api',apiRouter)
 apiServer.listen(port+1, () => {
   console.log('JSON Server is running')
 })
