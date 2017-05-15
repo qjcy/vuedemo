@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="index-right">
-      <slide-show :slides="slides"></slide-show>
+      <slide-show :slides="slides" :inv="slideSpeed" @onchange="doSomethingOnSlideChange"></slide-show>
       <div class="index-board-list">
         <div class="index-board-item" v-for="(item, index) in boardList"
              :class="[{'line-last':index%2!==0},'index-board-'+item.id]">
@@ -54,8 +54,14 @@
         console.log(err)
       })
     },
+    methods: {
+      doSomethingOnSlideChange () {
+          console.log('doSomethingOnSlideChange run')
+      }
+    },
     data(){
       return {
+        slideSpeed: 2000,
         slides: [
           {
             /*webpack利用require打包，图片通过js引入到项目里模板里就需要require*/
