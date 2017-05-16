@@ -5,11 +5,11 @@
         <img src="../assets/logo.png" alt="">
         <div class="head-nav">
           <ul class="nav-list">
-            <li>登录</li>
+            <li @click="logClick">登录</li>
             <li class="nav-pile">|</li>
-            <li>注册</li>
+            <li @click="regClick">注册</li>
             <li class="nav-pile">|</li>
-            <li>关于</li>
+            <li @click="aboutClick">关于</li>
           </ul>
         </div>
       </div>
@@ -22,16 +22,49 @@
     <div class="app-foot">
       <p>© 2016 lqj MIT</p>
     </div>
+    <my-dialog :is-show="isShowAboutDialog" @on-close="closeDialog('isShowAboutDialog')">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci amet consectetur deserunt dicta dolores earum eligendi, error explicabo harum, iste modi nam nulla obcaecati odio quasi, repellendus saepe veritatis vero!</p>
+    </my-dialog>
+    <my-dialog :is-show="isShowLogDialog" @on-close="closeDialog('isShowLogDialog')">
+      <log-form></log-form>
+    </my-dialog>
+    <my-dialog :is-show="isShowRegDialog" @on-close="closeDialog('isShowRegDialog')">
+      <reg-form></reg-form>
+    </my-dialog>
   </div>
 </template>
 
 <script>
+  import Dialog from './dialog'
+  import LogForm from './logForm'
+  import RegForm from './regForm'
   export default {
-      data (){
-          return {
-
-          }
+    components: {
+      myDialog: Dialog,
+      LogForm,
+      RegForm
+    },
+    data (){
+      return {
+        isShowAboutDialog: false,
+        isShowLogDialog: false,
+        isShowRegDialog: false
       }
+    },
+    methods: {
+      aboutClick () {
+        this.isShowAboutDialog = true
+      },
+      logClick () {
+        this.isShowLogDialog = true
+      },
+      regClick () {
+        this.isShowRegDialog = true
+      },
+      closeDialog (attr) {
+        this[attr] = false
+      }
+    }
   }
 </script>
 
@@ -57,39 +90,48 @@
     font: inherit;
     vertical-align: baseline;
   }
+
   /* HTML5 display-role reset for older browsers */
   article, aside, details, figcaption, figure,
   footer, header, hgroup, menu, nav, section {
     display: block;
   }
+
   body {
     line-height: 1;
   }
+
   ol, ul {
     list-style: none;
   }
+
   blockquote, q {
     quotes: none;
   }
+
   blockquote:before, blockquote:after,
   q:before, q:after {
     content: '';
     content: none;
   }
+
   table {
     border-collapse: collapse;
     border-spacing: 0;
   }
+
   a {
     color: inherit;
     text-decoration: none;
   }
+
   body {
     background: #f0f2f5;
-    font-family: "Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", "Microsoft YaHei UI", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
     font-size: 14px;
     color: #444;
   }
+
   .app-head {
     background: #363636;
     color: #b2b2b2;
@@ -97,30 +139,38 @@
     line-height: 90px;
     width: 100%;
   }
+
   .app-head-inner {
     width: 1200px;
     margin: 0 auto;
   }
+
   .head-logo {
     float: left;
   }
+
   .app-head-inner img {
     width: 50px;
     margin-top: 20px;
   }
+
   .head-nav {
     float: right;
   }
+
   .head-nav ul {
     overflow: hidden;
   }
+
   .head-nav li {
     cursor: pointer;
     float: left;
   }
+
   .nav-pile {
     padding: 0 10px;
   }
+
   .app-foot {
     text-align: center;
     height: 80px;
@@ -130,15 +180,18 @@
     clear: both;
     margin-top: 30px;
   }
+
   .container {
     width: 1200px;
     margin: 0 auto;
   }
+
   .hr {
     height: 1px;
     width: 100%;
     background: #ddd;
   }
+
   .button {
     background: #4fc08d;
     color: #fff;
@@ -146,23 +199,29 @@
     padding: 10px 20px;
     cursor: pointer;
   }
+
   .button:hover {
     background: #4fc08d;
   }
+
   .g-form {
 
   }
+
   .g-form-line {
     padding: 15px 0;
   }
+
   .g-form-label {
     width: 100px;
     font-size: 16px;
     display: inline-block;
   }
+
   .g-form-input {
     display: inline-block;
   }
+
   .g-form-input input {
     height: 30px;
     width: 200px;
@@ -171,9 +230,11 @@
     padding: 0 10px;
     border: 1px solid #ccc;
   }
+
   .g-form-btn {
     padding-left: 100px;
   }
+
   .g-form-error {
     color: red;
     padding-left: 15px;
