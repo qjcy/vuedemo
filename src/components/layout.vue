@@ -5,9 +5,12 @@
         <img src="../assets/logo.png" alt="">
         <div class="head-nav">
           <ul class="nav-list">
-            <li @click="logClick">登录</li>
-            <li class="nav-pile">|</li>
-            <li @click="regClick">注册</li>
+            <li>{{username}}</li>
+            <li v-if="username!==''" class="nav-pile">|</li>
+            <li v-if="username!==''" @click="quit">退出</li>
+            <li v-if="username===''" @click="logClick">登录</li>
+            <li v-if="username===''" class="nav-pile">|</li>
+            <li v-if="username===''" @click="regClick">注册</li>
             <li class="nav-pile">|</li>
             <li @click="aboutClick">关于</li>
           </ul>
@@ -23,10 +26,12 @@
       <p>© 2016 lqj MIT</p>
     </div>
     <my-dialog :is-show="isShowAboutDialog" @on-close="closeDialog('isShowAboutDialog')">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci amet consectetur deserunt dicta dolores earum eligendi, error explicabo harum, iste modi nam nulla obcaecati odio quasi, repellendus saepe veritatis vero!</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci amet consectetur deserunt dicta dolores
+        earum eligendi, error explicabo harum, iste modi nam nulla obcaecati odio quasi, repellendus saepe veritatis
+        vero!</p>
     </my-dialog>
     <my-dialog :is-show="isShowLogDialog" @on-close="closeDialog('isShowLogDialog')">
-      <log-form></log-form>
+      <log-form @has-log="onSuccessLog"></log-form>
     </my-dialog>
     <my-dialog :is-show="isShowRegDialog" @on-close="closeDialog('isShowRegDialog')">
       <reg-form></reg-form>
@@ -48,7 +53,8 @@
       return {
         isShowAboutDialog: false,
         isShowLogDialog: false,
-        isShowRegDialog: false
+        isShowRegDialog: false,
+        username: ''
       }
     },
     methods: {
@@ -63,6 +69,10 @@
       },
       closeDialog (attr) {
         this[attr] = false
+      },
+      onSuccessLog (data) {
+        this.closeDialog('isShowLogDialog')
+        this.username = data.username
       }
     }
   }
